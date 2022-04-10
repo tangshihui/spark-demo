@@ -1,0 +1,48 @@
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.4'
+    }
+}
+
+plugins {
+    id 'java'
+    id 'scala'
+}
+
+apply plugin: 'com.github.johnrengelman.shadow'
+
+
+group 'org.example'
+version '1.0.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+
+    implementation 'org.scala-lang:scala-library:2.12.15'
+    implementation(group:'org.apache.spark',name:'spark-core_2.12', version:'3.1.3')
+    implementation(group:'org.apache.spark',name:'spark-sql_2.12', version:'3.1.3')
+
+}
+
+shadowJar {
+    zip64 true
+    exclude 'META-INF/*.RSA', 'META-INF/*.SF', 'META-INF/*.DSA'
+//    relocate('com.google.**', 'gridx.com.google')
+//    relocate('com.fasterxml.**', 'gridx.com.fasterxml')
+//    relocate('org.json4s', 'gridx.org.json4s')
+    archiveFileName = "spark-demo.jar"
+}
+
+test {
+    useJUnitPlatform()
+}
