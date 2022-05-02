@@ -1,0 +1,10 @@
+tome 89
+jack 90
+lucy 79
+lili 88
+zhangsan 89
+lisi 92
+xiaoming 95
+xiaohong 96
+xiaoliu 78
+xiaozhao 68
